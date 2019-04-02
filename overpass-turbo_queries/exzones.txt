@@ -1,0 +1,53 @@
+//Modified version of https://overpass-turbo.eu/s/vs3 (reddit user /u/Tntnnbltn)
+[date:"2016-07-16T00:00:00Z"]
+[timeout:620]
+[bbox:{{bbox}}];
+(
+
+//Tags that are confirmed to classify gyms as 'parks' for EX Raids
+    way[leisure=park];
+    way[landuse=recreation_ground];
+    way[leisure=recreation_ground];
+    way[leisure=pitch];
+    way[leisure=garden];
+    way[leisure=golf_course];
+    way[leisure=playground];
+    way[landuse=meadow];
+    way[landuse=grass];
+    way[landuse=greenfield];
+    way[natural=scrub];
+    way[natural=heath];
+    way[natural=grassland];
+    way[landuse=farmyard];
+    way[landuse=vineyard];
+    way[landuse=farmland];
+    way[landuse=orchard];
+);
+out body;
+>;
+out skel qt;
+
+//Confirmed OSM tags will appear in blue
+//Unconfirmed OSM tags will appear in grey
+
+{{style:
+
+    way[leisure=park],
+    way[landuse=recreation_ground], 
+    way[leisure=recreation_ground],
+    way[leisure=pitch],
+    way[leisure=garden],
+    way[leisure=golf_course],
+    way[leisure=playground],
+    way[landuse=meadow],
+    way[landuse=grass],
+    way[landuse=greenfield],
+    way[natural=scrub],
+    way[natural=heath],
+	way[natural=grassland],
+    way[landuse=farmyard],
+    way[landuse=vineyard],
+    way[landuse=farmland],
+    way[landuse=orchard]
+{ color:blue; fill-color:blue; }
+}}
