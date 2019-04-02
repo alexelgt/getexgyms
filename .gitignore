@@ -1,0 +1,5 @@
+.DS_Store
+*.csv
+*.geojson
+getexgyms_results
+output
