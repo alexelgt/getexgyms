@@ -2,15 +2,26 @@
 
 #==== Deal with command line
 if [ $1 = "-h" ] || [ $1 = "help" ]; then
-   echo "usage:" $0 "gym_data.csv ex_zones.geojson blocking_zones.geojson"
+   echo "usage:" $0 "gym_data.csv ex_zones.geojson blocking_zones.geojson (--noalias --fixencoding --addheader)"
    echo " * gym_data.csv: file with gyms's data (name,latitude,longitude)"
    echo " * ex_zones.geojson: exported file from overpass-turbo.eu with ex zones"
    echo " * blocking_zones.geojson: exported file from overpass-turbo.eu with blocking zones"
+   echo " * --noalias: it'll run the commands with ./osmcoverer"
+   echo " * --fixencoding: file with blocked gyms will be encoded to MS-ANSI. Might be needed to upload the file to My Maps"
+   echo " * --addheader: add a header row. Needed if you want to upload to My Maps"
 
    exit
 fi
 
-if ! type "osmcoverer" > /dev/null; then
+osmcoverer=osmcoverer
+for i in "$@"
+do
+   if [ "$i" = "--noalias" ]; then
+      osmcoverer=./osmcoverer #if you change this to other path it'll work
+   fi
+done
+
+if ! type "$osmcoverer" > /dev/null; then
   echo "Install osmcoverer"
 
   exit
@@ -23,20 +34,26 @@ if [ "$#" -lt 3 ]; then
 fi
 
 if [ ! -f $1 ]; then
-   echo "first input file not found"
-
+   echo $1 "not found"
+   exit
+elif [ ${1: -4} != ".csv" ]; then
+   echo $1 "is not a csv file"
    exit
 fi
 
 if [ ! -f $2 ]; then
-   echo "second input file not found"
-
+   echo $2 "not found"
+   exit
+elif [ ${2: -8} != ".geojson" ]; then
+   echo $2 "is not a geojson file"
    exit
 fi
 
-if [ ! -f $1 ]; then
-   echo "third input file not found"
-
+if [ ! -f $3 ]; then
+   echo $3 "not found"
+   exit
+elif [ ${3: -8} != ".geojson" ]; then
+   echo $3 "is not a geojson file"
    exit
 fi
 
@@ -85,7 +102,7 @@ fi
 echo
 echo "Get all gyms inside an ex zone"
 echo "------------------------------"
-osmcoverer -markers=$gym_data -checkcellcenters -excludecellfeatures -skipmarkerless -skipfeatureless $ex_zones
+$osmcoverer -markers=$gym_data -checkcellcenters -excludecellfeatures -skipmarkerless -skipfeatureless $ex_zones
 
 # Rename output file
 mv output/markers_within_features.csv $output_folder/$gym_filename_ex_with_blocked #this file includes ex gyms inside a blocking zone
@@ -101,7 +118,7 @@ echo "File 'output/"$ex_zones"' removed (not the input file)"
 echo
 echo "Get all gyms inside a blocking zone"
 echo "------------------------------"
-osmcoverer -markers=$output_folder/$gym_filename_ex_with_blocked -checkcellcenters -excludecellfeatures -skipmarkerless -skipfeatureless $blocking_zones
+$osmcoverer -markers=$output_folder/$gym_filename_ex_with_blocked -checkcellcenters -excludecellfeatures -skipmarkerless -skipfeatureless $blocking_zones
 
 # Rename output file
 mv output/markers_within_features.csv $output_folder/$gym_filename_blocked
@@ -139,10 +156,7 @@ if [ $fixencoding = true ]; then
    echo
    echo "Changed encoding of file called '"$gym_filename_blocked"'"
 fi
-
 #== Change encoder of the file gym_filename_blocked
-
-
 
 echo
 echo "Output files saved in the folder called '"$output_folder"'"
