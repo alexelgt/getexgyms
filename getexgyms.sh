@@ -2,10 +2,10 @@
 
 #==== Deal with command line
 if [ $1 = "-h" ] || [ $1 = "help" ]; then
-   echo "usage:" $0 "gym_data.csv ex_zones.geojson blocking_zones.geojson (--noalias --fixencoding --addheader)"
-   echo " * gym_data.csv: file with gyms's data (name,latitude,longitude)"
-   echo " * ex_zones.geojson: exported file from overpass-turbo.eu with ex zones"
-   echo " * blocking_zones.geojson: exported file from overpass-turbo.eu with blocking zones"
+   echo "usage:" $0 "gyms_data.csv exzones_data.geojson blockingzones_data.geojson (--noalias --fixencoding --addheader)"
+   echo " * gyms_data.csv: file with gyms's data (Name,Latitude,Longitude)"
+   echo " * exzones_data.geojson: exported file from overpass-turbo.eu with ex zones"
+   echo " * blockingzones_data.geojson: exported file from overpass-turbo.eu with blocking zones"
    echo " * --noalias: it'll run the commands with ./osmcoverer"
    echo " * --fixencoding: file with blocked gyms will be encoded to MS-ANSI. Might be needed to upload the file to My Maps"
    echo " * --addheader: add a header row. Needed if you want to upload to My Maps"
