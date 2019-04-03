@@ -16,23 +16,24 @@ This bash script runs [osmcoverer](https://github.com/MzHub/osmcoverer) in such 
 * [Run script with the example data](#run-script-with-the-example-data)
     * [Windows](#windows-run-example)
     * [macOS or Linux](#macos-or-linux-set-up)
+* [How to get geojson files](#how-to-get-geojson-files)
 
 ## **Prerequisites**
 You need to have [osmcoverer](https://github.com/MzHub/osmcoverer) on your computer and Windows' users also need to have [Cygwin](https://cygwin.com).
 
 ### **Windows prerequisites**
-1. Go to [Cygwin](https://cygwin.com) and install it.
+1. Go to <a href="https://cygwin.com" target="_blank">Cygwin</a> and install it.
 
 2. Open **Cygwin Terminal** (this will create some folders in **C:\\cygwin\\home**).
 
-3. Go to [osmcoverer releases](https://github.com/MzHub/osmcoverer/releases), download the file for Windows and extract it.
+3. Go to <a href="https://github.com/MzHub/osmcoverer/releases" target="_blank">osmcoverer releases</a>, download the file for Windows and extract it.
 
 4. Copy (or move) the file called **osmcoverer.exe** to **C:\\cygwin\\home\\\<user>** (or any subfolder).
 
 Now you have Cygwin and osmcoverer set up.
 
 ### **macOS or Linux prerequisites**
-1. Go to [osmcoverer releases](https://github.com/MzHub/osmcoverer/releases), download the file for macOS or Linux and extract it.
+1. Go to <a href="https://github.com/MzHub/osmcoverer/releases" target="_blank">osmcoverer releases</a>, download the file for macOS or Linux and extract it.
 
 2. Open the Terminal app an go to the folder where you have extracted the file (```cd /path_to_the_folder```).
 
@@ -59,9 +60,9 @@ Where:
 * **gyms_data.csv:** file with gyms's data.
     * **Estructure of the csv file:** Name,Latitude,Longitude. **(Do NOT include a header row)**
 
-* **exzones_data.geojson:** exported file from overpass-turbo.eu with ex zones
+* **exzones_data.geojson:** exported file from <a href="https://overpass-turbo.eu" target="_blank">overpass-turbo.eu</a> with ex zones
 
-* **blockingzones_data.geojson:** exported file from overpass-turbo.eu with blocking zones
+* **blockingzones_data.geojson:** exported file from <a href="https://overpass-turbo.eu" target="_blank">overpass-turbo.eu</a> with blocking zones
 
 * **--noalias:** it'll run the commands with ./osmcoverer
 
@@ -101,3 +102,6 @@ The flag **--noalias** runs the code assuming that **osmcoverer** is in the same
 
 2. Type ```./getexgyms.sh example_data/gymsAlcoSanse.csv example_data/madrid_exzones.geojson example_data/madrid_blockingzones.geojson```
 
+## **How to get geojson files**
+
+Soon
