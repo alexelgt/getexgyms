@@ -81,7 +81,7 @@ blocking_zones=$3
 #== Set variables
 
 #==== Set output files names
-gym_filename=`echo $gym_data| sed 's/.csv//g'`
+gym_filename=`echo $(basename $gym_data)| sed 's/.csv//g'`
 
 gym_filename_ex_with_blocked=$gym_filename"_ex_with_blocked.csv" #temporal file
 gym_filename_blocked=$gym_filename"_blocked.csv"
@@ -108,7 +108,7 @@ $osmcoverer -markers=$gym_data -checkcellcenters -excludecellfeatures -skipmarke
 mv output/markers_within_features.csv $output_folder/$gym_filename_ex_with_blocked #this file includes ex gyms inside a blocking zone
 
 #==== Remove output file created by osmcoverer
-rm output/$ex_zones
+rm output/$(basename $ex_zones)
 echo
 echo "File 'output/"$ex_zones"' removed (not the input file)"
 #== Remove output file created by osmcoverer
@@ -124,7 +124,7 @@ $osmcoverer -markers=$output_folder/$gym_filename_ex_with_blocked -checkcellcent
 mv output/markers_within_features.csv $output_folder/$gym_filename_blocked
 
 #==== Remove output file created by osmcoverer
-rm output/$blocking_zones
+rm output/$(basename $blocking_zones)
 echo
 echo "File 'output/"$blocking_zones"' removed (not the input file)"
 #== Remove output file created by osmcoverer
