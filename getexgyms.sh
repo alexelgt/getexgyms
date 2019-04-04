@@ -130,11 +130,17 @@ echo "File 'output/"$blocking_zones"' removed (not the input file)"
 #== Remove output file created by osmcoverer
 #== Get all gyms from previous file inside a blocking zone
 
-# Get all gyms inside an ex zone that are outside of a blocking zone
-grep -vf $output_folder/$gym_filename_blocked $output_folder/$gym_filename_ex_with_blocked > $output_folder/$gym_filename_ex #this file includes the true ex gyms
+if [ -s $output_folder/$gym_filename_blocked ]
+then
+   # Get all gyms inside an ex zone that are outside of a blocking zone
+   grep -vf $output_folder/$gym_filename_blocked $output_folder/$gym_filename_ex_with_blocked > $output_folder/$gym_filename_ex #this file includes the true ex gyms
 
-# Delete file with all ex gyms inside a blocking zone
-rm $output_folder/$gym_filename_ex_with_blocked
+   # Delete file with all ex gyms inside a blocking zone
+   rm $output_folder/$gym_filename_ex_with_blocked
+else
+   # If there are not blocked gyms just rename the file
+   mv $output_folder/$gym_filename_ex_with_blocked $output_folder/$gym_filename_ex
+fi
 
 #==== Add header to output files
 if [ $addheader = true ]; then

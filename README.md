@@ -85,7 +85,7 @@ If this flag is included then the script will run **osmcoverer** as ```./osmcove
 If you've followed the instructions for Windows, you need to include this flag.
 
 #### **--fixencoding**
-This flag might be needed if you want to upload the file with blocked gym to My Maps. Otherwise it might happend what is shown in this picture:
+This flag might be needed if you want to upload the file with blocked gyms to My Maps. Otherwise it might happend what is shown in this picture:
 
 ![example of wrong encoding](assets/example_of_wrong_encoding.png)
 
