@@ -15,8 +15,8 @@ This bash script runs [osmcoverer](https://github.com/MzHub/osmcoverer) in such 
         * [--addheader](#--addheader)
 * [What does the script do](#what-does-the-script-do)
     * [Output files](#output-files)
-        * [gyms_data_blocked.csv](#gyms_data_blocked.csv)
-        * [gyms_data_ex.csv](#gyms_data_ex.csv)
+        * [gyms_data_blocked.csv](#gyms_data_blockedcsv)
+        * [gyms_data_ex.csv](#gyms_data_excsv)
 * [Example data](#example-data)
 * [Run script with the example data](#run-script-with-the-example-data)
     * [Windows](#windows-run-example)
@@ -27,7 +27,7 @@ This bash script runs [osmcoverer](https://github.com/MzHub/osmcoverer) in such 
 * [References](#references)
 
 # **Prerequisites**
-You need to have [osmcoverer](https://github.com/MzHub/osmcoverer) on your computer and Windows' users also need to have [Cygwin](https://cygwin.com).
+You need to have [osmcoverer](https://github.com/MzHub/osmcoverer) on your computer and Windows users also need to have [Cygwin](https://cygwin.com).
 
 ## **Windows prerequisites**
 1. Go to [Cygwin](https://cygwin.com) and install it.
@@ -98,7 +98,7 @@ This flag will include a row at the begining of the output files with the text:
 This is needed if you want to upload the ouput files to My Maps. If you don't do this, the first row of the data will be used as a header.
 
 # **What does the script do**
-*Note: read reference 1 if you want to know more about input parameters of osmcoverer*
+*Note: read reference 1 if you want to know more about input parameters of osmcoverer.*
 
 1. Run oscoverer with this configuration:
     * -markers=gyms_data.csv *(all gyms)*
@@ -110,7 +110,7 @@ This is needed if you want to upload the ouput files to My Maps. If you don't do
 2. Run oscoverer with this configuration:
     * -markers=gym_data_ex_with_blocked.csv
 
-    * \<input file> is exclusionareaa_data.geojson
+    * \<input file> is exclusionareas_data.geojson
 
     With this second run, the output (markers_within_features.csv) contains all gyms inside an EX area and also an exclusion area. This file is renamed to **gyms_data_blocked.csv** and moved to the folder **getexgyms_results**.
 
@@ -119,7 +119,7 @@ This is needed if you want to upload the ouput files to My Maps. If you don't do
 4. The file called **gyms_data_ex_with_blocked** is removed.
 
 ## **Output files**
-Just as a recap, once you have run the script 2 files are saved in the folder **getexgyms_results**:
+Just as a recap, once you have run the script, 2 files are saved in the folder **getexgyms_results**:
 
 ### **gyms_data_blocked.csv**
 This file contains **all the gyms inside an EX area that are also inside an exclusion area**.
