@@ -65,7 +65,7 @@ To run the code type:
 ```./getexgyms.sh gyms_data.csv exareas_data.geojson exclusionareas_data.geojson (--noalias --fixencoding --addheader)```
 
 Where:
-* **gyms_data.csv:** file with gyms's data.
+* **gyms_data.csv:** file with gyms' data.
     * **Estructure of the csv file:** Name,Latitude,Longitude. **(Do NOT include a header row)**
 
 * **exareas_data.geojson:** exported file from overpass-turbo.eu with EX areas
