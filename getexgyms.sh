@@ -2,10 +2,10 @@
 
 #==== Deal with command line
 if [ $1 = "-h" ] || [ $1 = "help" ]; then
-   echo "usage:" $0 "gyms_data.csv exzones_data.geojson blockingzones_data.geojson (--noalias --fixencoding --addheader)"
-   echo " * gyms_data.csv: file with gyms's data (Name,Latitude,Longitude)"
-   echo " * exzones_data.geojson: exported file from overpass-turbo.eu with ex zones"
-   echo " * blockingzones_data.geojson: exported file from overpass-turbo.eu with blocking zones"
+   echo "usage:" $0 "gyms_data.csv exareas_data.geojson exclusionareas_data.geojson (--noalias --fixencoding --addheader)"
+   echo " * gyms_data.csv: file with gyms' data (Name,Latitude,Longitude)"
+   echo " * exareas_data.geojson: exported file from overpass-turbo.eu with ex areas"
+   echo " * exclusionareas_data.geojson: exported file from overpass-turbo.eu with exclusion areas"
    echo " * --noalias: it'll run the commands with ./osmcoverer"
    echo " * --fixencoding: file with blocked gyms will be encoded to MS-ANSI. Might be needed to upload the file to My Maps"
    echo " * --addheader: add a header row. Needed if you want to upload to My Maps"
@@ -76,8 +76,8 @@ done
 
 #==== Set variables
 gym_data=$1
-ex_zones=$2
-blocking_zones=$3
+ex_areas=$2
+exclusion_areas=$3
 #== Set variables
 
 #==== Set output files names
@@ -98,44 +98,44 @@ if [ ! -d $output_folder ]; then
 fi
 #== Set output folder
 
-#==== Get all gyms inside an ex zone
+#==== Get all gyms inside an ex area
 echo
-echo "Get all gyms inside an ex zone"
+echo "Get all gyms inside an ex area"
 echo "------------------------------"
-$osmcoverer -markers=$gym_data -checkcellcenters -excludecellfeatures -skipmarkerless -skipfeatureless $ex_zones
+$osmcoverer -markers=$gym_data -checkcellcenters -excludecellfeatures -skipmarkerless -skipfeatureless $ex_areas
 
 # Rename output file
-mv output/markers_within_features.csv $output_folder/$gym_filename_ex_with_blocked #this file includes ex gyms inside a blocking zone
+mv output/markers_within_features.csv $output_folder/$gym_filename_ex_with_blocked #this file includes ex gyms inside an exclusion area
 
 #==== Remove output file created by osmcoverer
-rm output/$(basename $ex_zones)
+rm output/$(basename $ex_areas)
 echo
-echo "File 'output/"$ex_zones"' removed (not the input file)"
+echo "File 'output/"$ex_areas"' removed (not the input file)"
 #== Remove output file created by osmcoverer
-#== Get all gyms inside an ex zone
+#== Get all gyms inside an ex area
 
-#==== Get all gyms from previous file inside a blocking zone
+#==== Get all gyms from previous file inside an exclusion area
 echo
-echo "Get all gyms inside a blocking zone"
+echo "Get all gyms inside an exclusion area"
 echo "------------------------------"
-$osmcoverer -markers=$output_folder/$gym_filename_ex_with_blocked -checkcellcenters -excludecellfeatures -skipmarkerless -skipfeatureless $blocking_zones
+$osmcoverer -markers=$output_folder/$gym_filename_ex_with_blocked -checkcellcenters -excludecellfeatures -skipmarkerless -skipfeatureless $exclusion_areas
 
 # Rename output file
 mv output/markers_within_features.csv $output_folder/$gym_filename_blocked
 
 #==== Remove output file created by osmcoverer
-rm output/$(basename $blocking_zones)
+rm output/$(basename $exclusion_areas)
 echo
-echo "File 'output/"$blocking_zones"' removed (not the input file)"
+echo "File 'output/"$exclusion_areas"' removed (not the input file)"
 #== Remove output file created by osmcoverer
-#== Get all gyms from previous file inside a blocking zone
+#== Get all gyms from previous file inside an exclusion area
 
 if [ -s $output_folder/$gym_filename_blocked ]
 then
-   # Get all gyms inside an ex zone that are outside of a blocking zone
+   # Get all gyms inside an ex area that are outside of an exclusion area
    grep -vf $output_folder/$gym_filename_blocked $output_folder/$gym_filename_ex_with_blocked > $output_folder/$gym_filename_ex #this file includes the true ex gyms
 
-   # Delete file with all ex gyms inside a blocking zone
+   # Delete file with all ex gyms inside an exclusion area
    rm $output_folder/$gym_filename_ex_with_blocked
 else
    # If there are not blocked gyms just rename the file
@@ -167,4 +167,4 @@ fi
 echo
 echo "Output files saved in the folder called '"$output_folder"'"
 echo " - The file called '"$gym_filename_ex"' contains all ex gyms"
-echo " - The file called '"$gym_filename_blocked"' contains all ex gyms that are inside a blocking zone (they don't have the tag)"
+echo " - The file called '"$gym_filename_blocked"' contains all ex gyms that are inside an exclusion area (they don't have the tag)"
