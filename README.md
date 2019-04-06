@@ -101,16 +101,16 @@ This is needed if you want to upload the ouput files to My Maps. If you don't do
 *Note: read reference 1 if you want to know more about input parameters of osmcoverer.*
 
 1. Run osmcoverer with this configuration:
-    * -markers=gyms_data.csv *(all gyms)*
+    * **-markers**=*gyms_data.csv* (all gyms)
 
-    * \<input file> is exareas_data.geojson
+    * **\<input file>** is *exareas_data.geojson*
     
     With this first run, the output file (markers_within_features.csv) contains all gyms inside an EX area. This file is renamed to **gyms_data_ex_with_blocked.csv** and moved to the folder **getexgyms_results**.
 
 2. Run osmcoverer with this configuration:
-    * -markers=gym_data_ex_with_blocked.csv
+    * **-markers**=*gym_data_ex_with_blocked.csv*
 
-    * \<input file> is exclusionareas_data.geojson
+    * **\<input file>** is *exclusionareas_data.geojson*
 
     With this second run, the output (markers_within_features.csv) contains all gyms inside an EX area and also an exclusion area. This file is renamed to **gyms_data_blocked.csv** and moved to the folder **getexgyms_results**.
 
@@ -119,7 +119,7 @@ This is needed if you want to upload the ouput files to My Maps. If you don't do
 4. The file called **gyms_data_ex_with_blocked** is removed.
 
 ## **Output files**
-Just as a recap, once you have run the script, 2 files are saved in the folder **getexgyms_results**:
+Just as a recap, once you've run the script, 2 files are saved in the folder **getexgyms_results**:
 
 ### **gyms_data_blocked.csv**
 This file contains **all the gyms inside an EX area that are also inside an exclusion area**.
